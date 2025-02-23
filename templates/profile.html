@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваш Кабінет | Даринка</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>👤 Особистий кабінет</h1>
+            <nav>
+                <a href="{{ url_for('logout') }}" class="btn logout">🚪 Вийти</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Привіт, {{ user.username }}! 👋</h2>
+            <p>Ось доступні товари у нашому магазині:</p>
+
+            <div class="product-grid">
+                {% for product in products %}
+                    <div class="product-card">
+                        <img src="{{ url_for('static', filename='placeholder.jpg') }}" alt="Товар">
+                        <h3>{{ product.name }}</h3>
+                        <p class="price">{{ product.price }} грн</p>
+                        <p>{{ product.description }}</p>
+                        <button class="buy-btn">Купити</button>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <a href="{{ url_for('add_product') }}" class="btn add-product">➕ Додати товар</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Даринка. Всі права захищені.</p>
+        </div>
+    </footer>
+</body>
+</html>
+

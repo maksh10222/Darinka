@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Додати товар</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Додати новий товар</h1>
+        <nav>
+            <a href="/">Головна</a>
+        </nav>
+    </header>
+
+    <main>
+        <form method="POST">
+            <label for="name">Назва товару:</label>
+            <input type="text" name="name" required>
+            
+            <label for="price">Ціна:</label>
+            <input type="number" name="price" step="0.01" required>
+            
+            <label for="description">Опис:</label>
+            <textarea name="description" required></textarea>
+            
+            <button type="submit">Додати товар</button>
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Даринка | Інтернет-Магазин</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="{{ url_for('home') }}">🛍️ Даринка</a></h1>
+            <nav>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('add_product') }}" class="btn add-product">➕ Додати товар</a>
+                    <a href="{{ url_for('logout') }}" class="btn logout">🚪 Вийти</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="btn">🔑 Увійти</a>
+                    <a href="{{ url_for('register') }}" class="btn">📝 Реєстрація</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            {% if current_user.is_authenticated %}
+                <h2>👋 Вітаємо, {{ current_user.username }}!</h2>
+                <p>Ось доступні товари у нашому магазині:</p>
+            {% else %}
+                <h2>🛒 Наші товари</h2>
+                <p>Ласкаво просимо! Авторизуйтеся, щоб мати більше можливостей.</p>
+            {% endif %}
+
+            <div class="product-grid">
+                {% for product in products %}
+                    <div class="product-card">
+                        <img src="{{ url_for('static', filename='placeholder.jpg') }}" alt="Товар">
+                        <h3>{{ product.name }}</h3>
+                        <p class="price">{{ product.price }} грн</p>
+                        <p>{{ product.description }}</p>
+                        <button class="buy-btn">Купити</button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Даринка. Всі права захищені.</p>
+        </div>
+    </footer>
+</body>
+</html>
